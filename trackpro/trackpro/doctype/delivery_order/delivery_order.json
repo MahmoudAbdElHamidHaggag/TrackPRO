@@ -1,0 +1,169 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{DO}-{DD}-{MM}-{YYYY}-{######}",
+ "creation": "2025-07-23 11:56:27.474908",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_gzf1",
+  "amended_from",
+  "status",
+  "contract_of_carriage",
+  "download_command",
+  "posting_date",
+  "time",
+  "column_break_jnpc",
+  "driver",
+  "vehicle",
+  "loading_area",
+  "unloading_area",
+  "quantity"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_gzf1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Delivery Order",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "download_command",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Download command",
+   "options": "Download command",
+   "reqd": 1
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Driver",
+   "options": "Driver",
+   "reqd": 1
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "default": "Now",
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Time",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "download_command.contract_of_carriage",
+   "fieldname": "contract_of_carriage",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Contract of Carriage",
+   "options": "Contract of Carriage",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_jnpc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "label": "Quantity",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "download_command.loading_area",
+   "fieldname": "loading_area",
+   "fieldtype": "Link",
+   "label": " Loading Area",
+   "options": "Territory",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "download_command.unloading_area",
+   "fieldname": "unloading_area",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Unloading Area",
+   "options": "Territory",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending Unloading\nUnloaded",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Unloading Receipt",
+   "link_fieldname": "delivery_order"
+  }
+ ],
+ "modified": "2025-08-08 23:36:24.606780",
+ "modified_by": "Administrator",
+ "module": "TrackPro",
+ "name": "Delivery Order",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Orange",
+   "title": "Pending Unloading"
+  },
+  {
+   "color": "Green",
+   "title": "Unloaded"
+  }
+ ]
+}

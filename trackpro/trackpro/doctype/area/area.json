@@ -1,0 +1,76 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-22 10:14:43.667186",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "loading_area",
+  "unloading_area",
+  "eqdownload",
+  "eqdelivery",
+  "equnownload",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "loading_area",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Loading Area",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "unloading_area",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Unloading Area",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Remarks"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "eqdownload",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "EQDownload",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "eqdelivery",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "EQDelivery",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "equnownload",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "EQUnownload",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-31 00:22:49.398201",
+ "modified_by": "Administrator",
+ "module": "TrackPro",
+ "name": "Area",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

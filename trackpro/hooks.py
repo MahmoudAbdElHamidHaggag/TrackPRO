@@ -50,8 +50,8 @@ app_license = "mit"
 
 # Svg Icons
 # ------------------
-# include app icons in desk
-# app_include_icons = "trackpro/public/icons.svg"
+#include app icons in desk
+app_include_icons = "/assets/trackpro/image/trackpro-logo.png"
 
 # Home Pages
 # ----------
@@ -242,3 +242,17 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+doc_events = {
+    "Sales Invoice": {
+        "on_submit": "trackpro.trackpro.billing.on_si_submit",
+        "on_cancel": "trackpro.trackpro.billing.on_si_cancel",
+    }
+}
+
+
+
+# doc_events = {
+#     "Sales Invoice": {
+#         "on_cancel": "trackpro.trackpro.integrations.si_hooks.on_sales_invoice_cancel",
+#     }
+# }

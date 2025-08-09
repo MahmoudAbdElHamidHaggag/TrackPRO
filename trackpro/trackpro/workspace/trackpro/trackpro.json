@@ -1,0 +1,84 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"yrKj3sdPu2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TrackPRO</span>\",\"col\":12}},{\"id\":\"OBgghT-pTv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Contract Of Carriage\",\"col\":3}},{\"id\":\"pRQiGeyExN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Billing Batch\",\"col\":3}},{\"id\":\"UknALBhNm2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Download Command\",\"col\":3}},{\"id\":\"hTlNk3-50y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Delivery Order\",\"col\":3}},{\"id\":\"rYYB-RVA9Y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Unloading Receipt\",\"col\":3}},{\"id\":\"U9949ep6mb\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trackpro Setting\",\"col\":3}},{\"id\":\"RPzSeytcXo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}}]",
+ "creation": "2025-07-21 21:23:01.674992",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "color-review-points",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "TrackPRO",
+ "links": [],
+ "modified": "2025-08-06 19:29:19.212285",
+ "modified_by": "Administrator",
+ "module": "TrackPro",
+ "name": "TrackPRO",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 28.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Trackpro Setting",
+   "link_to": "TrackPRO Setting",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Contract Of Carriage",
+   "link_to": "Contract of Carriage",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Sales Invoice",
+   "link_to": "Sales Invoice",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Sales Billing Batch",
+   "link_to": "Sales Billing Batch",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Download Command",
+   "link_to": "Download command",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Delivery Order",
+   "link_to": "Delivery Order",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Unloading Receipt",
+   "link_to": "Unloading Receipt",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "TrackPRO"
+}

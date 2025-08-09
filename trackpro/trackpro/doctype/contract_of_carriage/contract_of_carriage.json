@@ -1,0 +1,286 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{COC}-{DD}-{MM}-{YYYY}-{#####}",
+ "creation": "2025-07-21 22:56:17.376799",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "contract_details",
+  "contract_details_section",
+  "amended_from",
+  "status",
+  "customer",
+  "start_date",
+  "end_date",
+  "company",
+  "column_break_mvqu",
+  "transported_materials",
+  "agreed_quantity",
+  "uom",
+  "loss_ratio",
+  "cost_center",
+  "loading_and_unloading_areas_section",
+  "loading_and_unloading_areas",
+  "add_section",
+  "remarks_contract",
+  "executed_and_remaining_quantity_section",
+  "executed_quantity_download",
+  "remaining_quantity_download",
+  "column_break_qlbz",
+  "executed_quantity_delivered",
+  "remaining_quantity_delivered",
+  "column_break_kvdf",
+  "executed_quantity_unloaded",
+  "remaining_quantity_unloaded",
+  "connections_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Contract of Carriage",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: doc.agreed_quantity > 0",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "UOM",
+   "mandatory_depends_on": "eval: doc.agreed_quantity > 0",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "transported_materials",
+   "fieldtype": "Data",
+   "label": "Transported Materials"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_mvqu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "agreed_quantity",
+   "fieldtype": "Float",
+   "label": "Agreed Quantity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contract_details_section",
+   "fieldtype": "Section Break",
+   "label": "Contract Details"
+  },
+  {
+   "fieldname": "loading_and_unloading_areas_section",
+   "fieldtype": "Section Break",
+   "in_standard_filter": 1,
+   "label": "Loading And Unloading Areas"
+  },
+  {
+   "fieldname": "loading_and_unloading_areas",
+   "fieldtype": "Table",
+   "label": "Loading And Unloading Areas",
+   "options": "Area",
+   "reqd": 1
+  },
+  {
+   "fieldname": "loss_ratio",
+   "fieldtype": "Percent",
+   "label": "Loss Ratio"
+  },
+  {
+   "fieldname": "remarks_contract",
+   "fieldtype": "Text Editor",
+   "label": "Remarks Contract"
+  },
+  {
+   "fieldname": "add_section",
+   "fieldtype": "Section Break",
+   "label": "Add"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections "
+  },
+  {
+   "fieldname": "contract_details",
+   "fieldtype": "Tab Break",
+   "label": "Contract Details"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nDraft\nNot Started\nIn Progress\nCompleted\nFinished\nClosed\nCancelled",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "executed_quantity_download",
+   "fieldtype": "Float",
+   "label": "Executed Quantity Download",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "remaining_quantity_download",
+   "fieldtype": "Float",
+   "label": "Remaining Quantity Download",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "executed_quantity_delivered",
+   "fieldtype": "Float",
+   "label": "Executed Quantity Delivered",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "remaining_quantity_delivered",
+   "fieldtype": "Float",
+   "label": "Remaining Quantity Delivered",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "executed_quantity_unloaded",
+   "fieldtype": "Float",
+   "label": "Executed Quantity Unloaded",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "remaining_quantity_unloaded",
+   "fieldtype": "Float",
+   "label": "Remaining Quantity Unloaded",
+   "read_only": 1
+  },
+  {
+   "fieldname": "executed_and_remaining_quantity_section",
+   "fieldtype": "Section Break",
+   "label": "Executed And Remaining Quantity"
+  },
+  {
+   "fieldname": "column_break_qlbz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_kvdf",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Download command",
+   "link_fieldname": "contract_of_carriage"
+  },
+  {
+   "link_doctype": "Delivery Order",
+   "link_fieldname": "contract_of_carriage"
+  },
+  {
+   "link_doctype": "Unloading Receipt",
+   "link_fieldname": "contract_of_carriage"
+  }
+ ],
+ "modified": "2025-08-08 16:35:20.032318",
+ "modified_by": "Administrator",
+ "module": "TrackPro",
+ "name": "Contract of Carriage",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "ASC",
+ "states": [
+  {
+   "color": "Cyan",
+   "title": "Draft"
+  },
+  {
+   "color": "Purple",
+   "title": "Not Started"
+  },
+  {
+   "color": "Orange",
+   "title": "In Progress"
+  },
+  {
+   "color": "Blue",
+   "title": "Completed"
+  },
+  {
+   "color": "Pink",
+   "title": "Finished"
+  },
+  {
+   "color": "Gray",
+   "title": "Closed"
+  },
+  {
+   "color": "Red",
+   "title": "Cancelled"
+  }
+ ]
+}

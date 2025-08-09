@@ -1,0 +1,121 @@
+source,target,context,path
+A Sales Invoice already exists for this batch.,توجد فاتورة مبيعات بالفعل لهذه الدفعة.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Add,إضافة,field:add_section.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Agreed Quantity,الكمية المتفق عليها,field:agreed_quantity.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+All unloading receipts for this contract have been billed.,لقد تم إصدار فواتير لجميع إيصالات التفريغ لهذا العقد.,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.js
+Amended From,معدّل من,field:amended_from.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Area,منطقة,DocType,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/area/area.json
+Cancelled,ملغي,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Cannot cancel this batch while the Sales Invoice exists and is not cancelled/returned.,لا يمكن إلغاء هذه الدفعة طالما أن فاتورة المبيعات موجودة ولم تُلغ أو تُسترجع.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.py
+Cannot create a delivery order with a quantity greater than the remaining quantity of the download command.,لا يمكن إنشاء أمر تسليم بكمية أكبر من الكمية المتبقية في أمر التنزيل.,code:_\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Cannot create a download command with a quantity greater than the contract's remaining download quantity.,لا يمكن إنشاء أمر تنزيل بكمية أكبر من الكمية المتبقية للتنزيل في العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Cannot create/modify a download command for an inactive contract.,لا يمكن إنشاء/تعديل أمر تنزيل لعقد غير نشط.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.py
+"Cannot modify a contract that is Closed, Cancelled, or Finished.",لا يمكن تعديل عقد حالته مغلق أو ملغي أو منتهٍ.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Cannot unload a quantity greater than the remaining quantity on the delivery order.,لا يمكن تفريغ كمية أكبر من الكمية المتبقية في أمر التسليم.,code:_\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Close Contract,إغلاق العقد,code:_\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.js
+Close Download Command,إغلاق أمر التنزيل,code:_\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.js
+Closed,مغلق,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Company,الشركة,field:company.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Completed,مكتمل,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Connections,الاتصالات,field:connections_tab.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Contract Details,تفاصيل العقد,field:contract_details_section.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Contract is not active; cannot create/modify a Delivery Order.,العقد غير نشط؛ لا يمكن إنشاء/تعديل أمر التسليم.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.py
+Contract is not active; cannot create/modify an Unloading Receipt.,العقد غير نشط؛ لا يمكن إنشاء/تعديل إيصال التفريغ.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.py
+Contract is required.,يجب أن يكون هناك عقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Contract of Carriage,عقد النقل,DocType,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Cost Account,حساب التكلفة,field:cost_account.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/trackpro_setting/trackpro_setting.json
+Cost Center,مركز التكلفة,field:cost_center.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Count Unbilled Unloading,سندات التفريغ غير المفوتره,field:count_unbilled_unloading.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.json
+Customer,العميل,field:customer.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Delivered Quantity,الكمية المستلمه,field:delivered_quantity.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unbilled_unloading/unbilled_unloading.json
+Delivery Order,أمر التسليم,DocType,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.json
+Delivery Order areas must match the Download Command areas.,يجب أن تتطابق مناطق أمر التسليم مع مناطق أمر التنزيل.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.py
+Difference Percentage,نسبة الفرق,field:difference_percentage.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.json
+Difference Quantity,كمية الفرق,field:difference_quantity.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.json
+Download command,أمر التنزيل,DocType,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.json
+Download command end date cannot be after the contract end date.,أمر التنزيل تاريخ النهاية لا يمكن أن يكون  بعد تاريخ نهاية العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Download command end date cannot be before the contract start date.,أمر التنزيل تاريخ النهاية لا يمكن أن يكون  قبل تاريخ بداية العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.py
+Download Command End Date cannot be earlier than Start Date.,أمر التنزيل تاريخ النهاية لا يمكن أن يكون أقدم من تاريخ البداية.,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.js
+Download command has been permanently closed,تم إغلاق أمر التنزيل نهائيًا,code:_\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.js
+Download command start date cannot be after the contract end date.,أمر التنزيل تاريخ البداية لا يمكن أن يكون  بعد تاريخ نهاية العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.py
+Download command start date cannot be before the contract start date.,أمر التنزيل تاريخ البداية لا يمكن أن يكون  قبل تاريخ بداية العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Draft,مسودة,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Driver,السائق,field:driver.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.json
+End Date,تاريخ النهاية,field:end_date.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+End Date cannot be earlier than Start Date.,تاريخ النهاية لا يمكن أن يكون أقدم من تاريخ البداية.,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.js
+EQDelivery,الكمية المنفذه من اومر التسليم,field:eqdelivery.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/area/area.json
+EQDownload,الكمية المنفذه من اومر التحميل,field:eqdownload.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/area/area.json
+EQUnownload,الكمية المنفذه من سندات التفريغ,field:equnownload.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/area/area.json
+Executed And Remaining Quantity,المنفذ والمتبقي من الكمية,field:executed_and_remaining_quantity_section.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Executed Quantity Delivered,الكمية المنفذة من اومر التسليم,field:executed_quantity_delivered.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Executed Quantity Delivery,الكمية المنفذة من اومر التسليم,field:executed_quantity_delivery.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.json
+Executed Quantity Download,الكمية المنفذه من اومر التحميل,field:executed_quantity_download.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Executed Quantity Unload,الكمية المنفذه اومر التفريغ,field:executed_quantity_unload.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.json
+Executed Quantity Unloaded,الكمية المنفذه اومر التفريغ,field:executed_quantity_unloaded.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Finished,منتهي,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+In Progress,فى مراحل التقدم,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Income Account,حساب الدخل,field:income_account.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/trackpro_setting/trackpro_setting.json
+Invalid path.,المسار غير صالح,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.js
+Invoiced,مفوتوره,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.json
+Item,الصنف,field:item.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/trackpro_setting/trackpro_setting.json
+Loaded Quantity,الكمية المحمله,field:loaded_quantity.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.json
+Loading And Unloading Areas,مناطق التحميل والتفريغ,field:loading_and_unloading_areas_section.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Loading Area,منطقة التحميل,field:loading_area.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/area/area.json
+Loading area cannot be the same as the unloading area.,منطقة التحميل لا يمكن ان تكون نفس منطقة التفريغ,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Loss Ratio,نسبة الفقد,field:loss_ratio.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+No unloading receipts have been created for this contract.,لم يتم إنشاء إيصالات التفريغ لهذا العقد.,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.js
+No unloading receipts were selected in the table.,لم يتم تحديد إيصالات التفريغ في الجدول.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Not Started,لم يبداء,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Pending Unloading,فى انتظار التفريغ,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.json
+Please add at least one unloading receipt row.,يرجى إضافة صف واحد على الأقل لإيصال التفريغ.,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.js
+Please choose a path (Loading → Unloading) first.,الرجاء اختيار المسار (التحميل → التفريغ) أولاً.,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.js
+Please select Contract of Carriage and Download Command first.,الرجاء تحديد عقد النقل وأمر التنزيل أولاً.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.py
+Please select the Download Command Start Date first.,يُرجى تحديد تاريخ بدء أمر التنزيل أولاً.,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.js
+Please select the Start Date first.,يُرجى تحديد تاريخ البدء أولاً.,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.js
+Posting Date,تاريخ القيد,field:posting_date.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.json
+Quantity,الكمية,field:quantity.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.json
+Quantity exceeds the remaining download quantity in the contract.,الكمية تتجاوز كمية التنزيل المتبقية في العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.py
+Quantity exceeds the remaining quantity on the Download Command.,الكمية تتجاوز الكمية المتبقية في أمر التنزيل.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.py
+Quantity must be greater than zero.,يجب أن تكون الكمية أكبر من صفر.,code:_\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Remaining Quantity Delivered,المتبقية الكمية من اومر التسليم,field:remaining_quantity_delivered.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Remaining Quantity Delivery,المتبقية الكمية من اومر التسليم,field:remaining_quantity_delivery.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.json
+Remaining Quantity Download,الكميه المتبقى من اومر التحميل,field:remaining_quantity_download.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Remaining Quantity Unload,الكمية المتبقية من اذون التفريغ,field:remaining_quantity_unload.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.json
+Remaining Quantity Unloaded,الكمية المتبقة من اذون التفريغ,field:remaining_quantity_unloaded.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Remarks,ملاحظات,field:remarks.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/area/area.json
+Remarks Contract,ملاحظات العقد,field:remarks_contract.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Sales Billing Batch,دفعة الفوترة,DocType,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.json
+Sales Invoice,فاتورة مبيعات,field:sales_invoice.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.json
+"Sales Invoice is submitted. Cancel/return it first, then unbill.",تم تقديم فاتورة المبيعات. قم بإلغائها أو إرجاعها أولًا، ثم قم بإلغاء الفاتورة.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Selected Delivery Order does not belong to the selected contract.,طلب التسليم المحدد لا ينتمي إلى العقد المحدد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.py
+Selected Delivery Order does not belong to the selected Download Command.,أمر التسليم المحدد لا ينتمي إلى أمر التنزيل المحدد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.py
+Selected Download Command does not belong to the selected contract.,أمر التنزيل المحدد لا ينتمي إلى العقد المحدد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.py
+Start Date,تاريخ البداية,field:start_date.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Start date cannot be after end date.,لا يمكن أن يكون تاريخ البدء بعد تاريخ الانتهاء.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Status,الحالة,field:status.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+The contract end date cannot be earlier than the contract start date.,لا يجوز أن يكون تاريخ انتهاء العقد قبل تاريخ بدء العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.py
+The contract has been closed.,لقد تم إغلاق العقد.,code:_\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.js
+The selected loading/unloading path does not exist on this contract.,مسار التحميل/التفريغ المحدد غير موجود في هذا العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+There are no unbilled unloading receipts for this contract.,لا توجد إيصالات تفريغ غير مفوترة لهذا العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+Time,الوقت,field:time.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.json
+Total Delivered Quantity,اجمالى الكميات المسلمه,field:total_delivered_quantity.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.json
+Total quantity must be greater than zero.,اجمالى الكمية يجب أن تكون أكبر من صفر.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/api.py
+TrackPro,تطبيق النقليات المحترف,Module Def,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/area/area.json
+TrackPRO,تطبيق النقليات المحترف,Workspace,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/workspace/trackpro/trackpro.json
+TrackPRO Setting,إعدادات تطبيق النقليات المحترف,DocType,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/trackpro_setting/trackpro_setting.json
+Transported Materials,المواد المنقوله,field:transported_materials.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Unbilled Unloading,سندات التفريغ غير المفوتره,DocType,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.json
+Uninvoiced,غير مفوتر,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/sales_billing_batch/sales_billing_batch.json
+Unloaded,مفرّغ,field:status.option,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.json
+Unloaded Quantity,الكمية المفرغه,field:unloaded_quantity.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.json
+Unloaded quantity must be greater than zero.,يجب أن تكون الكمية المفرّغة أكبر من صفر.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.py
+Unloading Area,منطقة التفريغ,field:unloading_area.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/area/area.json
+Unloading Area cannot be the same as the Loading Area.,لا يمكن أن تكون منطقة التفريغ هي نفسها منطقة التحميل.,code:frappe\.msgprint\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.js
+Unloading Receipt,سند التفريغ,DocType,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unbilled_unloading/unbilled_unloading.json
+Unloading Receipt areas must match the Delivery Order areas.,يجب أن تتطابق مناطق استلام التفريغ مع مناطق أمر التسليم.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.py
+Unloading Receipt areas must match the Download Command (loading/unloading).,يجب أن تتطابق مناطق استلام التفريغ مع أمر التنزيل (التحميل/التفريغ).,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.py
+Unloading Receipt date cannot be after the contract end date.,سند التفريغ  التاريخ لا يمكن أن يكون  بعد تاريخ نهاية العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.py
+Unloading Receipt date cannot be before the contract start date.,سند التفريغ التاريخ لا يمكن أن يكون  قبل تاريخ بداية العقد.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/unloading_receipt/unloading_receipt.py
+UOM,وحدة القياس,field:uom.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/contract_of_carriage/contract_of_carriage.json
+Vehicle,المركبة,field:vehicle.label,/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/delivery_order/delivery_order.json
+You must select a contract of carriage first.,يجب اختيار عقد النقل أولًا.,code:frappe\.throw\(\s*["\'](.+?)["\']\s*\),/mnt/data/trackpro_extracted/trackpro/trackpro/trackpro/doctype/download_command/download_command.py
