@@ -4,6 +4,7 @@ app_publisher = "MahmoudAbdElHamidHaggag"
 app_description = "Smart Fleet and Transportation Management"
 app_email = "haggag.haggag224@gmail.com"
 app_license = "mit"
+app_version = "0.1.0"
 
 # Apps
 # ------------------
