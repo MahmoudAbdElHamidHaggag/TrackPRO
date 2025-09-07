@@ -146,12 +146,31 @@ def closed_statu(download):
     return "Closed"
 
 
+def _ur_date_field() -> str:
+    meta = frappe.get_meta("Unloading Receipt")
+    for f in ("date", "posting_date", "transaction_date", "unloading_date"):
+        if meta.get_field(f):
+            return f
+    frappe.throw("No date field found on Unloading Receipt. Add a Date field (e.g. 'date' or 'posting_date').")
+
+def _validated_between(date_field: str, from_date: str | None, to_date: str | None) -> dict:
+    if not from_date or not to_date:
+        frappe.throw("Please select both From Date and To Date.")
+    if getdate(from_date) > getdate(to_date):
+        frappe.throw("From Date cannot be after To Date.")
+    return {date_field: ["between", [from_date, to_date]]}
+
 @frappe.whitelist()
-def get_unbilled_unloading(contract):
+def get_unbilled_unloading(contract, from_date=None, to_date=None):
+    date_field = _ur_date_field()
+    filters = {"contract_of_carriage": contract, "docstatus": 1}
+    filters.update(_validated_between(date_field, from_date, to_date))
+
     all_receipts = frappe.get_all(
         "Unloading Receipt",
-        filters={"contract_of_carriage": contract, "docstatus": 1},
-        fields=["name", "unloaded_quantity", "sales_invoice"],
+        filters=filters,
+        fields=["name", "unloaded_quantity", "driver", "vehicle", "sales_invoice", date_field],
+        order_by=f"{date_field} asc, name asc",
     )
 
     if not all_receipts:
@@ -168,6 +187,9 @@ def get_unbilled_unloading(contract):
             {
                 "name": r["name"],
                 "unloaded_quantity": flt(r.get("unloaded_quantity") or 0),
+                "driver": r.get("driver"),
+                "vehicle": r.get("vehicle"),
+                "date": r.get(date_field),
             }
             for r in unbilled
         ],
@@ -175,6 +197,85 @@ def get_unbilled_unloading(contract):
         "total": total,
     }
 
+@frappe.whitelist()
+def get_unbilled_delivery(contract, from_date=None, to_date=None):
+    date_field = _ur_date_field()
+    filters = {"contract_of_carriage": contract, "docstatus": 1}
+    filters.update(_validated_between(date_field, from_date, to_date))
+
+    all_receipts = frappe.get_all(
+        "Unloading Receipt",
+        filters=filters,
+        fields=["name", "loaded_quantity", "driver", "vehicle", "sales_invoice", date_field],
+        order_by=f"{date_field} asc, name asc",
+    )
+
+    if not all_receipts:
+        return {"status": "none", "receipts": [], "count": 0, "total": 0}
+
+    unbilled = [r for r in all_receipts if not r.get("sales_invoice")]
+    if not unbilled:
+        return {"status": "all_billed", "receipts": [], "count": 0, "total": 0}
+
+    total = sum(flt(r.get("loaded_quantity") or 0) for r in unbilled)
+    return {
+        "status": "ok",
+        "receipts": [
+            {
+                "name": r["name"],
+                "loaded_quantity": flt(r.get("loaded_quantity") or 0),
+                "driver": r.get("driver"),
+                "vehicle": r.get("vehicle"),
+                "date": r.get(date_field),
+            }
+            for r in unbilled
+        ],
+        "count": len(unbilled),
+        "total": total,
+    }
+
+@frappe.whitelist()
+def get_unbilled_less_dev_unload(contract, from_date=None, to_date=None):
+    date_field = _ur_date_field()
+    filters = {"contract_of_carriage": contract, "docstatus": 1}
+    filters.update(_validated_between(date_field, from_date, to_date))
+
+    all_receipts = frappe.get_all(
+        "Unloading Receipt",
+        filters=filters,
+        fields=["name", "driver", "vehicle", "loaded_quantity", "unloaded_quantity", "sales_invoice", date_field],
+        order_by=f"{date_field} asc, name asc",
+    )
+
+    if not all_receipts:
+        return {"status": "none", "receipts": [], "count": 0, "total": 0}
+
+    unbilled = [r for r in all_receipts if not r.get("sales_invoice")]
+    if not unbilled:
+        return {"status": "all_billed", "receipts": [], "count": 0, "total": 0}
+
+    rows, total = [], 0.0
+    for r in unbilled:
+        billable = min(flt(r.get("loaded_quantity") or 0), flt(r.get("unloaded_quantity") or 0))
+        if billable > 0:
+            rows.append({
+                "name": r["name"],
+                "unloaded_quantity": billable,
+                "driver": r.get("driver"),
+                "vehicle": r.get("vehicle"),
+                "date": r.get(date_field),
+            })
+            total += billable
+
+    if not rows:
+        return {"status": "all_billed", "receipts": [], "count": 0, "total": 0}
+
+    return {
+        "status": "ok",
+        "receipts": rows,
+        "count": len(rows),
+        "total": total,
+    }
 
 
 @frappe.whitelist()
@@ -471,6 +572,8 @@ def search_open_download_commands_with_pending_unloading(doctype, txt, searchfie
             "page_len": int(page_len or 20),
         },
     )
+###################################################################3
+
 
 @frappe.whitelist()
 def search_open_delivery_orders(doctype, txt, searchfield, start, page_len, filters):
@@ -506,15 +609,24 @@ def search_open_delivery_orders(doctype, txt, searchfield, start, page_len, filt
     )
 
 
+#########################################################################
+
 
 @frappe.whitelist()
 def create_sales_invoice(docname):
+    from frappe.utils import nowdate, flt
+
     batch = frappe.get_doc("Sales Billing Batch", docname)
 
+    # لو في فاتورة مرتبطة سابقًا
     if getattr(batch, "sales_invoice", None):
         si_doc = frappe.get_doc("Sales Invoice", batch.sales_invoice)
         if si_doc.docstatus == 2 or si_doc.is_return:
-            ur_names = frappe.get_all("Unloading Receipt", filters={"sales_invoice": batch.sales_invoice}, pluck="name")
+            ur_names = frappe.get_all(
+                "Unloading Receipt",
+                filters={"sales_invoice": batch.sales_invoice},
+                pluck="name",
+            )
             if ur_names:
                 frappe.db.sql(
                     """
@@ -528,51 +640,165 @@ def create_sales_invoice(docname):
         else:
             frappe.throw("A Sales Invoice already exists for this batch.")
 
+    # إعدادات
     settings = frappe.get_single("TrackPRO Setting")
     company = settings.company or frappe.defaults.get_user_default("Company")
     income_account = settings.income_account or frappe.get_value("Company", company, "default_income_account")
     cost_center = settings.cost_center or frappe.get_value("Company", company, "cost_center")
-    item_code = settings.item or frappe.db.get_single_value("Selling Settings", "default_item")
     cost_account = getattr(settings, "cost_account", None) or frappe.get_value("Company", company, "default_expense_account")
+    taxes_template = getattr(settings, "sales_taxes_and_charges_template", None)
+
+    # حقول الدفعة
+    type_of_contract = (batch.get("type_of_contract") or "").strip()
+    supplied_material_item = batch.get("supplied_materials")
+    transportation_price = flt(batch.get("transportation_price") or 0)
+    supplied_material_price = flt(batch.get("supplied_material_price") or 0)
+
+    transportation_service_item = getattr(settings, "item", None) or frappe.db.get_single_value(
+        "Selling Settings", "default_item"
+    )
 
     if not batch.contract_of_carriage:
         frappe.throw("Contract is required.")
-    probe = get_unbilled_unloading(batch.contract_of_carriage)
-    if probe["status"] in ("none", "all_billed"):
-        frappe.throw("There are no unbilled unloading receipts for this contract.")
 
-    if not batch.unbilled_unloading:
+    rows = batch.get("unbilled_unloading") or []
+    if not rows:
         frappe.throw("No unloading receipts were selected in the table.")
 
-    total_qty = sum(flt(d.delivered_quantity or 0) for d in batch.unbilled_unloading)
+    total_qty = sum(flt(d.get("delivered_quantity") or 0) for d in rows)
     if total_qty <= 0:
         frappe.throw("Total quantity must be greater than zero.")
 
-    count_rows = len(batch.unbilled_unloading)
+    valid_contracts = {"Transportation", "Transport and Supply"}
+    if type_of_contract not in valid_contracts:
+        frappe.throw("Type Of Contract must be one of: Transportation, Transport and Supply.")
+
+    if type_of_contract == "Transportation":
+        if not transportation_service_item:
+            frappe.throw("Transportation service item is not set (TrackPRO Setting.item or Selling Settings.default_item).")
+        if transportation_price <= 0:
+            frappe.throw("Transportation Price must be greater than zero for Transportation contracts.")
+    else:
+        if not supplied_material_item:
+            frappe.throw("Supplied Materials is required for Transport and Supply contracts.")
+        if supplied_material_price <= 0:
+            frappe.throw("Supplied Material Price must be greater than zero for Transport and Supply contracts.")
+        if not transportation_service_item:
+            frappe.throw("Transportation service item is not set (TrackPRO Setting.item or Selling Settings.default_item).")
+        if transportation_price <= 0:
+            frappe.throw("Transportation Price must be greater than zero for Transport and Supply contracts.")
+
+    # تحديث مجاميع الدفعة
+    count_rows = len(rows)
     batch.db_set("count_unbilled_unloading", count_rows)
     batch.db_set("total_delivered_quantity", total_qty)
 
+    # إنشاء الفاتورة مع إغلاق كل مصادر إعادة التسعير
     si = frappe.new_doc("Sales Invoice")
     si.customer = batch.customer
     si.company = company
-    si.append("items", {
-        "item_code": item_code,
-        "qty": total_qty,
-        "income_account": income_account,
-        "expense_account": cost_account,
-        "cost_center": cost_center,
-    })
-    si.insert(ignore_permissions=True)
+    si.posting_date = nowdate()
 
+    # اقفل أي Price List / Pricing Rules / خصومات / تقريب
+    si.selling_price_list = None
+    si.price_list_currency = None
+    si.ignore_pricing_rule = 1
+    si.flags.ignore_pricing_rule = 1
+    si.apply_discount_on = "Net Total"
+    si.additional_discount_percentage = 0
+    si.discount_amount = 0
+    si.disable_rounded_total = 1  # يمنع إنشاء صف تقريب
+
+    if taxes_template:
+        si.taxes_and_charges = taxes_template
+
+    # حمِّل القيم الافتراضية (بدون بنود لسه)
+    si.set_missing_values()
+
+    # لو فيه ضرائب، الغِ الشمول (Included In Print Rate) محليًا على الفاتورة
+    # علشان ما يعيدش توزيع السعر
+    for tx in (si.taxes or []):
+        if getattr(tx, "included_in_print_rate", 0):
+            tx.included_in_print_rate = 0
+
+    def add_item(item_code, qty, rate, desc=None):
+        child = si.append("items", {
+            "item_code": item_code,
+            "qty": qty,
+            "description": desc or "",
+            "income_account": income_account,
+            "expense_account": cost_account,
+            "cost_center": cost_center,
+            "discount_percentage": 0,
+            "discount_amount": 0,
+        })
+        # تثبيت السعر ومنع أي اشتقاق من Price List / Rules
+        child.pricing_rules = ""
+        child.margin_type = None
+        child.margin_rate_or_amount = 0
+        child.rate = flt(rate or 0)
+        child.price_list_rate = flt(rate or 0)
+        child.net_rate = flt(rate or 0)
+        child.base_rate = flt(rate or 0)
+        child.base_price_list_rate = flt(rate or 0)
+
+    if type_of_contract == "Transportation":
+        add_item(
+            transportation_service_item,
+            total_qty,
+            transportation_price,
+            desc=f"Transportation for {count_rows} receipts (Batch: {batch.name})",
+        )
+    else:
+        add_item(
+            supplied_material_item,
+            total_qty,
+            supplied_material_price,
+            desc=f"Supplied Materials for {count_rows} receipts (Batch: {batch.name})",
+        )
+        add_item(
+            transportation_service_item,
+            total_qty,
+            transportation_price,
+            desc=f"Transportation for {count_rows} receipts (Batch: {batch.name})",
+        )
+
+    # احسب الإجماليات بعد ما ثبتنا كل حاجة
+    si.calculate_taxes_and_totals()
+
+    # إدخال وترحيل
+    si.insert(ignore_permissions=True)
+    si.submit()
+
+    # ربط الفاتورة وتحديث سندات التفريغ
     batch.db_set({"sales_invoice": si.name, "status": "Invoiced"})
 
-    for d in batch.unbilled_unloading:
-        if d.unloading_receipt:
-            frappe.db.set_value("Unloading Receipt", d.unloading_receipt, {"sales_invoice": si.name, "status": "Invoiced"}, update_modified=False)
-            if frappe.get_meta("Unloading Receipt").has_field("billing_status"):
-                frappe.db.set_value("Unloading Receipt", d.unloading_receipt, "billing_status", "Invoiced")
+    ur_names = [r.unloading_receipt for r in rows if r.get("unloading_receipt")]
+    if ur_names:
+        frappe.db.sql(
+            """
+            UPDATE `tabUnloading Receipt`
+            SET sales_invoice=%(si)s, status='Invoiced'
+            WHERE name IN %(names)s
+            """,
+            {"si": si.name, "names": tuple(ur_names)},
+        )
+        if frappe.get_meta("Unloading Receipt").has_field("billing_status"):
+            frappe.db.sql(
+                """
+                UPDATE `tabUnloading Receipt`
+                SET billing_status='Invoiced'
+                WHERE name IN %(names)s
+                """,
+                {"names": tuple(ur_names)},
+            )
 
     return si.name
+
+
+
+#################################################################################
+
 
 
 @frappe.whitelist()

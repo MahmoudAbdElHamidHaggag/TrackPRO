@@ -8,6 +8,7 @@
   "company",
   "income_account",
   "cost_account",
+  "sales_taxes_and_charges_template",
   "cost_center",
   "item"
  ],
@@ -41,13 +42,19 @@
    "fieldtype": "Link",
    "label": "Cost Account",
    "options": "Account"
+  },
+  {
+   "fieldname": "sales_taxes_and_charges_template",
+   "fieldtype": "Link",
+   "label": "Sales Taxes and Charges Template",
+   "options": "Sales Taxes and Charges Template"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-08-06 18:40:39.644379",
+ "modified": "2025-09-07 11:43:59.353123",
  "modified_by": "Administrator",
  "module": "TrackPro",
  "name": "TrackPRO Setting",
