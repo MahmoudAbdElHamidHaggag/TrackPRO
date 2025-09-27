@@ -21,7 +21,6 @@ def execute(filters=None):
     return columns, data
 
 def get_columns():
-    """تعريف أعمدة التقرير"""
     return [
         {
             "label": _("Driver/السائق"),

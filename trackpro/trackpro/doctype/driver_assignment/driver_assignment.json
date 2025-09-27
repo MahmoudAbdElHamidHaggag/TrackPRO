@@ -1,0 +1,152 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{driver}-{vehicle}-{DD}-{MM}-{YY}-{####}",
+ "creation": "2025-09-21 13:38:39.403886",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_nsqz",
+  "amended_from",
+  "driver",
+  "vehicle",
+  "type",
+  "trailer",
+  "driver_vehicle",
+  "column_break_ujnw",
+  "from_datetime",
+  "to_datetime",
+  "status",
+  "section_break_wxqt",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_nsqz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Driver Assignment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Driver",
+   "options": "Driver",
+   "reqd": 1
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ujnw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Now",
+   "fieldname": "from_datetime",
+   "fieldtype": "Datetime",
+   "in_standard_filter": 1,
+   "label": "From Datetime",
+   "no_copy": 1,
+   "read_only": 1,
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "to_datetime",
+   "fieldtype": "Datetime",
+   "label": "To Datetime",
+   "read_only": 1
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nActive\nEnded",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_wxqt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "depends_on": "eval: doc.type === \"Tractor\"",
+   "fieldname": "trailer",
+   "fieldtype": "Data",
+   "label": "Trailer",
+   "read_only": 1
+  },
+  {
+   "fieldname": "driver_vehicle",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Driver Vehicle"
+  },
+  {
+   "fetch_from": "vehicle.custom_vehicle_category",
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Type"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-09-24 18:54:00.259197",
+ "modified_by": "Administrator",
+ "module": "TrackPro",
+ "name": "Driver Assignment",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Active"
+  },
+  {
+   "color": "Red",
+   "title": "Ended"
+  }
+ ],
+ "title_field": "driver_vehicle"
+}

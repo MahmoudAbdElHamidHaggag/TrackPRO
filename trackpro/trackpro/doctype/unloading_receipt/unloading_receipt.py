@@ -10,7 +10,7 @@ from trackpro.trackpro.api import (
     revert_quantity_to_contract,
 )
 
-ALLOWED_STATUSES = ("Not Started", "In Progress")
+ALLOWED_STATUSES = ("Not Started", "In Progress", "Completed")
 
 
 def _sum_unloaded_excluding_current(delivery_order, current_docname=None):
@@ -86,10 +86,10 @@ class UnloadingReceipt(Document):
         )
         remaining_to_unload = flt(de.quantity or 0) - flt(already_unloaded)
 
-        if flt(self.unloaded_quantity) > remaining_to_unload:
-            frappe.throw(
-                f"Unloaded quantity ({flt(self.unloaded_quantity)}) exceeds remaining quantity on the Delivery Order ({remaining_to_unload})."
-            )
+        # if flt(self.unloaded_quantity) > remaining_to_unload:
+        #     frappe.throw(
+        #         f"Unloaded quantity ({flt(self.unloaded_quantity)}) exceeds remaining quantity on the Delivery Order ({remaining_to_unload})."
+        #     )
 
         self.unloading_status()
 
@@ -172,4 +172,42 @@ class UnloadingReceipt(Document):
         do.save(ignore_permissions=True)
 
     def unloading_status(self):
-        self.status = "Invoiced" if self.sales_invoice else "Uninvoiced"
+        def _not_cancelled(doctype, name):
+            return bool(name and frappe.db.get_value(doctype, name, "docstatus") != 2)
+
+            # نوع النقل: من أمر التحميل إن وُجد، وإلا من نفس الـ UR لو عنده الحقل
+            do = self.get("delivery_order")
+            tb = None
+            if do:
+                tb = frappe.db.get_value("Delivery Order", do, "transported_by")
+            if not tb and frappe.get_meta(self.doctype).has_field("transported_by"):
+                tb = self.get("transported_by")
+            tb = tb or ""
+
+            si = self.get("sales_invoice")
+            pi = self.get("purchase_invoice") or self.get("Purchase_invoice")
+
+            has_si = _not_cancelled("Sales Invoice", si)
+            has_pi = _not_cancelled("Purchase Invoice", pi)
+
+            if tb == "Own Fleet":
+                # أسطولنا: لا مشتريات إطلاقًا
+                status = "Invoiced" if has_si else "Uninvoiced"
+            else:
+                # نقل خارجي
+                if has_si and has_pi:
+                    status = "Invoiced"
+                elif has_si:
+                    status = "Sales Billing"
+                elif has_pi:
+                    status = "Purchase Billing"
+                else:
+                    status = "Uninvoiced"
+
+            if self.status != status:
+                self.status = status
+                if self.docstatus == 1:
+                    self.db_set("status", status, update_modified=False)
+                    # لو عندك billing_status خلّيه يطابق
+                    if frappe.get_meta(self.doctype).has_field("billing_status"):
+                        self.db_set("billing_status", status, update_modified=False)

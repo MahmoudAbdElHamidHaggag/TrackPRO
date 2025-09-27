@@ -9,18 +9,32 @@
   "section_break_p80l",
   "amended_from",
   "status",
-  "sales_invoice",
+  "date",
+  "time",
   "contract_of_carriage",
   "download_command",
   "delivery_order",
   "loading_area",
   "unloading_area",
-  "driver",
-  "vehicle",
   "loaded_quantity",
   "unloaded_quantity",
   "difference_quantity",
-  "difference_percentage"
+  "difference_percentage",
+  "column_break_oypz",
+  "transported_by",
+  "driver",
+  "full_name",
+  "vehicle",
+  "sales_invoice",
+  "purchase_invoice",
+  "supplier",
+  "driver_iqama_number",
+  "driver_name",
+  "driver_license_number",
+  "vehicle_configuration",
+  "vehicle_plate_numbe",
+  "tractor_plate_number",
+  "trailer_plate_number"
  ],
  "fields": [
   {
@@ -61,20 +75,26 @@
    "options": "Delivery Order"
   },
   {
+   "depends_on": "eval: doc.transported_by === \"Own Fleet\"",
    "fetch_from": "delivery_order.driver",
    "fieldname": "driver",
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Driver",
-   "options": "Driver"
+   "mandatory_depends_on": "eval: doc.transported_by === \"Own Fleet\"",
+   "options": "Driver",
+   "read_only": 1
   },
   {
+   "depends_on": "eval: doc.type_of_transport === \"Own Fleet\"",
    "fetch_from": "delivery_order.vehicle",
    "fieldname": "vehicle",
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Vehicle",
-   "options": "Vehicle"
+   "mandatory_depends_on": "eval: doc.type_of_transport === \"Own Fleet\"",
+   "options": "Vehicle",
+   "read_only": 1
   },
   {
    "fetch_from": "delivery_order.quantity",
@@ -134,15 +154,126 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Uninvoiced\nInvoiced",
+   "options": "Uninvoiced\nSales Billing\nPurchase Billing\nInvoiced",
    "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "Now",
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time"
+  },
+  {
+   "fieldname": "column_break_oypz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Link",
+   "label": "Purchase Invoice",
+   "options": "Purchase Invoice",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery_order.transported_by",
+   "fieldname": "transported_by",
+   "fieldtype": "Select",
+   "label": "Transported By",
+   "options": "\nOwn Fleet\nExternal Carrier",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"Own Fleet\"",
+   "fetch_from": "delivery_order.full_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Full Name",
+   "mandatory_depends_on": "eval: doc.transported_by === \"Own Fleet\""
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fetch_from": "delivery_order.supplier",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "mandatory_depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "options": "Supplier",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fetch_from": "delivery_order.driver_iqama_number",
+   "fieldname": "driver_iqama_number",
+   "fieldtype": "Data",
+   "label": "Driver Iqama Number",
+   "mandatory_depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fetch_from": "delivery_order.driver_license_number",
+   "fieldname": "driver_license_number",
+   "fieldtype": "Data",
+   "label": "Driver License Number",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fetch_from": "delivery_order.vehicle_configuration",
+   "fieldname": "vehicle_configuration",
+   "fieldtype": "Select",
+   "label": "Vehicle Configuration",
+   "mandatory_depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "options": "\nTractor + Trailer\nTruck",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.vehicle_configuration === \"Truck\"",
+   "fetch_from": "delivery_order.vehicle_plate_number",
+   "fieldname": "vehicle_plate_numbe",
+   "fieldtype": "Data",
+   "label": "Vehicle Plate Numbe",
+   "mandatory_depends_on": "eval: doc.vehicle_configuration === \"Truck\"",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.vehicle_configuration === \"Tractor + Trailer\"",
+   "fetch_from": "delivery_order.tractor_plate_number",
+   "fieldname": "tractor_plate_number",
+   "fieldtype": "Data",
+   "label": "Tractor Plate Number",
+   "mandatory_depends_on": "eval: doc.vehicle_configuration === \"Tractor + Trailer\"",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.vehicle_configuration === \"Tractor + Trailer\"",
+   "fetch_from": "delivery_order.trailer_plate_number",
+   "fieldname": "trailer_plate_number",
+   "fieldtype": "Data",
+   "label": "Trailer Plate Number",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fetch_from": "delivery_order.driver_name",
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-09 18:28:20.146011",
+ "modified": "2025-09-25 12:52:01.933264",
  "modified_by": "Administrator",
  "module": "TrackPro",
  "name": "Unloading Receipt",
@@ -172,8 +303,16 @@
    "title": "Uninvoiced"
   },
   {
+   "color": "Orange",
+   "title": "Sales Billing"
+  },
+  {
+   "color": "Purple",
+   "title": "Purchase Billing"
+  },
+  {
    "color": "Green",
-   "title": "Invoiced"
+   "title": "Invoiced "
   }
  ]
 }

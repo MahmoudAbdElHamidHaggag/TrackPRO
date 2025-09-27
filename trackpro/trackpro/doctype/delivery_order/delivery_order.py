@@ -8,7 +8,7 @@ from trackpro.trackpro.api import (
     revert_quantity_to_contract,
 )
 
-ALLOWED_STATUSES = ("Not Started", "In Progress")
+ALLOWED_STATUSES = ("Not Started", "In Progress", "Completed")
 
 
 def _sum_do_qty_excluding_current(download_command: str, current_name: str | None = None, is_draft: bool = False) -> float:
@@ -120,17 +120,40 @@ class DeliveryOrder(Document):
         contract.save(ignore_permissions=True)
 
     def update_status(self):
-        """Set status to 'Pending Unloading' if there is remaining to unload, otherwise 'Unloaded'."""
-        delivered_qty = flt(self.quantity or 0)
-        unloaded_qty = (
-            frappe.db.sql(
-                """
-                SELECT COALESCE(SUM(unloaded_quantity), 0)
-                FROM `tabUnloading Receipt`
-                WHERE delivery_order = %s AND docstatus = 1
-                """,
-                self.name,
-            )[0][0]
-            or 0
-        )
-        self.status = "Pending Unloading" if unloaded_qty < delivered_qty else "Unloaded"
+        def _not_cancelled(doctype, name):
+            return bool(name and frappe.db.get_value(doctype, name, "docstatus") != 2)
+
+            # وجود أي سند تفريغ (Draft أو Submitted)
+            ur_exists = bool(frappe.db.exists(
+                "Unloading Receipt",
+                {"delivery_order": self.name, "docstatus": ["in", [0, 1]]}
+            ))
+
+            tb = self.get("transported_by") or ""              # Own Fleet / External Carrier
+            si = self.get("sales_invoice")
+            pi = self.get("purchase_invoice") or self.get("Purchase_invoice")
+
+            has_si = _not_cancelled("Sales Invoice", si)
+            has_pi = _not_cancelled("Purchase Invoice", pi)
+
+            if tb == "Own Fleet":
+                # أسطولنا: لا مشتريات إطلاقًا
+                if has_si:
+                    new = "Invoiced"
+                else:
+                    new = "Unloaded" if ur_exists else "Pending Unloading"
+            else:
+                # نقل خارجي
+                if has_si and has_pi:
+                    new = "Invoiced"
+                elif has_si:
+                    new = "Sales Billing"
+                elif has_pi:
+                    new = "Purchase Billing"
+                else:
+                    new = "Unloaded" if ur_exists else "Pending Unloading"
+
+            if self.status != new:
+                self.status = new
+                if self.docstatus == 1:
+                    self.db_set("status", new, update_modified=False)

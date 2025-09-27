@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{customer}-{billing_is_based_on}-{####}",
  "creation": "2025-07-23 13:30:15.697139",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -13,10 +14,12 @@
   "contract_of_carriage",
   "sales_invoice",
   "column_break_twba",
+  "posting_date",
   "from_date",
   "to_date",
   "type_of_contract",
   "supplied_materials",
+  "uom",
   "section_break_ywpa",
   "unbilled_unloading",
   "section_break_vfnb",
@@ -67,12 +70,14 @@
   {
    "fieldname": "count_unbilled_unloading",
    "fieldtype": "Int",
-   "label": "Count Unbilled Unloading"
+   "label": "Count Unbilled Unloading",
+   "read_only": 1
   },
   {
    "fieldname": "total_delivered_quantity",
    "fieldtype": "Float",
-   "label": "Total Delivered Quantity"
+   "label": "Total Delivered Quantity",
+   "read_only": 1
   },
   {
    "allow_on_submit": 1,
@@ -145,6 +150,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval: doc.type_of_contract === 'Transportation'",
    "fieldname": "transportation_price",
    "fieldtype": "Currency",
    "label": "Transportation Price",
@@ -156,16 +162,33 @@
    "fieldtype": "Currency",
    "label": "Supplied Material Price",
    "mandatory_depends_on": "eval: doc.type_of_contract === 'Transport and Supply'"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "contract_of_carriage.uom",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "UOM",
+   "options": "UOM"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-09-07 10:02:18.470062",
+ "modified": "2025-09-25 22:24:54.762951",
  "modified_by": "Administrator",
  "module": "TrackPro",
  "name": "Sales Billing Batch",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
