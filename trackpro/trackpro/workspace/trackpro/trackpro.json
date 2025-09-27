@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"yrKj3sdPu2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TrackPRO</span>\",\"col\":12}},{\"id\":\"OBgghT-pTv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Contract Of Carriage\",\"col\":3}},{\"id\":\"pRQiGeyExN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Billing Batch\",\"col\":3}},{\"id\":\"UknALBhNm2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Download Command\",\"col\":3}},{\"id\":\"hTlNk3-50y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Delivery Order\",\"col\":3}},{\"id\":\"rYYB-RVA9Y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Unloading Receipt\",\"col\":3}},{\"id\":\"GKzebwVOej\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Driver\",\"col\":3}},{\"id\":\"U9949ep6mb\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trackpro Setting\",\"col\":3}},{\"id\":\"RPzSeytcXo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"_tJldlwyPs\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicle\",\"col\":3}}]",
+ "content": "[{\"id\":\"yrKj3sdPu2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">TrackPRO</span>\",\"col\":12}},{\"id\":\"OBgghT-pTv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Contract Of Carriage\",\"col\":3}},{\"id\":\"pRQiGeyExN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Billing Batch\",\"col\":3}},{\"id\":\"UknALBhNm2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Download Command\",\"col\":3}},{\"id\":\"hTlNk3-50y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Delivery Order\",\"col\":3}},{\"id\":\"rYYB-RVA9Y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Unloading Receipt\",\"col\":3}},{\"id\":\"GKzebwVOej\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Driver\",\"col\":3}},{\"id\":\"U9949ep6mb\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trackpro Setting\",\"col\":3}},{\"id\":\"RPzSeytcXo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"_tJldlwyPs\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicle\",\"col\":3}},{\"id\":\"d4b40U0F9e\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Head Trailer Assignment\",\"col\":3}},{\"id\":\"O735a0ihC6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Journal Entry\",\"col\":3}},{\"id\":\"IKdolPvzRN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Driver Assignment\",\"col\":3}},{\"id\":\"AjUl6YRkCh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Billing Batch\",\"col\":3}},{\"id\":\"7MPwfz6Knc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":3}}]",
  "creation": "2025-07-21 21:23:01.674992",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "TrackPRO",
  "links": [],
- "modified": "2025-08-10 10:49:20.942532",
+ "modified": "2025-09-27 13:14:21.184251",
  "modified_by": "Administrator",
  "module": "TrackPro",
  "name": "TrackPRO",
@@ -28,8 +28,33 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Purchase Invoice",
+   "link_to": "Purchase Invoice",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
    "label": "Driver",
    "link_to": "Driver",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Head Trailer Assignment",
+   "link_to": "Head Trailer Assignment",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Journal Entry",
+   "link_to": "Journal Entry",
+   "stats_filter": "[]",
    "type": "DocType"
   },
   {
@@ -42,8 +67,24 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Driver Assignment",
+   "link_to": "Driver Assignment",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Contract Of Carriage",
    "link_to": "Contract of Carriage",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Purchase Billing Batch",
+   "link_to": "Purchase Billing Batch",
    "stats_filter": "[]",
    "type": "DocType"
   },

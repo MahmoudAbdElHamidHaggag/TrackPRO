@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-21 20:46:52.505144",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "receipt_number",
+  "date",
+  "delivered_quantity",
+  "driver",
+  "vehicle"
+ ],
+ "fields": [
+  {
+   "fieldname": "receipt_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Receipt Number"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "delivered_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Delivered Quantity"
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Driver"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vehicle"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-09-21 20:50:10.559625",
+ "modified_by": "Administrator",
+ "module": "TrackPro",
+ "name": "Billing Basis",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

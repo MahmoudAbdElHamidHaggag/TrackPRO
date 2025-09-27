@@ -1,6 +1,6 @@
 frappe.ui.form.on("Unloading Receipt", {
   onload(frm) {
-    frm.__updating_links = false;        
+    frm.__updating_links = false;
     frm.__setting_from_delivery_order = false;
     apply_queries(frm);
   },
@@ -46,7 +46,7 @@ frappe.ui.form.on("Unloading Receipt", {
       const dc = r?.message?.download_command;
       const coc = r?.message?.contract_of_carriage;
 
-     
+
       if (coc && frm.doc.contract_of_carriage !== coc) {
         await frm.set_value("contract_of_carriage", coc);
       }
@@ -58,13 +58,13 @@ frappe.ui.form.on("Unloading Receipt", {
       }
     } finally {
       frm.__updating_links = false;
-      apply_queries(frm); 
+      apply_queries(frm);
     }
   },
 });
 
 function apply_queries(frm) {
-  if (frm.__updating_links) return; 
+  if (frm.__updating_links) return;
 
   frm.set_query("contract_of_carriage", () => ({
     query: "trackpro.trackpro.api.search_contracts_from_pending_delivery_orders",
@@ -77,7 +77,7 @@ function apply_queries(frm) {
       filters: { contract: frm.doc.contract_of_carriage },
     }));
   } else {
-  
+
     frm.set_query("download_command", () => ({ filters: {} }));
   }
 

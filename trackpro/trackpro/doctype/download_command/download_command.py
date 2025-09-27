@@ -6,7 +6,7 @@ from frappe.model.document import Document
 from frappe.utils import getdate, flt
 from trackpro.trackpro.api import update_area_quantity, revert_area_quantity, revert_quantity_to_contract
 
-ALLOWED_STATUSES = ["Not Started", "In Progress"]
+ALLOWED_STATUSES = ["Not Started", "In Progress", "Completed"]
 
 
 class Downloadcommand(Document):
@@ -43,7 +43,7 @@ class Downloadcommand(Document):
 
         if flt(self.quantity) <= 0:
             frappe.throw("Quantity must be greater than zero.")
-        if flt(self.quantity) > flt(contract.remaining_quantity_download or 0):
+        if flt(self.quantity) > flt(contract.remaining_quantity_download or 0) and self.docstatus == 0:
             frappe.throw("Quantity exceeds the remaining download quantity in the contract.")
 
         self.calculate_executed_quantity()

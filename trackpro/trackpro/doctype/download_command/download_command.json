@@ -9,6 +9,7 @@
   "section_break_5tha",
   "amended_from",
   "status",
+  "posting_date",
   "customer",
   "contract_of_carriage",
   "start_date",
@@ -132,6 +133,14 @@
    "label": "Customer",
    "options": "Customer",
    "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1,
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
@@ -147,7 +156,7 @@
    "link_fieldname": "download_command"
   }
  ],
- "modified": "2025-08-08 23:32:21.114646",
+ "modified": "2025-09-11 18:51:42.216547",
  "modified_by": "Administrator",
  "module": "TrackPro",
  "name": "Download command",

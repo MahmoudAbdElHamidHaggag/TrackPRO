@@ -28,7 +28,7 @@ frappe.ui.form.on("Contract of Carriage", {
       });
     }
 
-    if (!frm.is_new() && frm.doc.docstatus === 1 && !["Closed", "Completed"].includes(frm.doc.status)) {
+    if (!frm.is_new() && frm.doc.docstatus === 1 && !["Closed", "Completed", "Finished"].includes(frm.doc.status)) {
       frm.add_custom_button("Create Download Command", function () {
         open_start_dialog(frm);
       });

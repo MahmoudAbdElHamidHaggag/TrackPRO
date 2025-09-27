@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{customer}-{billing_is_based_on}-{####}",
  "creation": "2025-07-23 13:30:15.697139",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -8,12 +9,25 @@
   "section_break_igll",
   "amended_from",
   "status",
+  "billing_is_based_on",
   "customer",
   "contract_of_carriage",
   "sales_invoice",
+  "column_break_twba",
+  "posting_date",
+  "from_date",
+  "to_date",
+  "type_of_contract",
+  "supplied_materials",
+  "uom",
+  "section_break_ywpa",
   "unbilled_unloading",
+  "section_break_vfnb",
+  "total_delivered_quantity",
   "count_unbilled_unloading",
-  "total_delivered_quantity"
+  "column_break_pwtk",
+  "transportation_price",
+  "supplied_material_price"
  ],
  "fields": [
   {
@@ -31,14 +45,19 @@
    "search_index": 1
   },
   {
+   "depends_on": "eval: doc.billing_is_based_on",
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Customer",
+   "mandatory_depends_on": "eval: doc.billing_is_based_on",
    "options": "Customer"
   },
   {
+   "depends_on": "eval: doc.customer",
    "fieldname": "contract_of_carriage",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Contract of Carriage",
    "options": "Contract of Carriage"
   },
@@ -51,12 +70,14 @@
   {
    "fieldname": "count_unbilled_unloading",
    "fieldtype": "Int",
-   "label": "Count Unbilled Unloading"
+   "label": "Count Unbilled Unloading",
+   "read_only": 1
   },
   {
    "fieldname": "total_delivered_quantity",
    "fieldtype": "Float",
-   "label": "Total Delivered Quantity"
+   "label": "Total Delivered Quantity",
+   "read_only": 1
   },
   {
    "allow_on_submit": 1,
@@ -73,16 +94,101 @@
    "label": "Status",
    "options": "Uninvoiced\nInvoiced",
    "read_only": 1
+  },
+  {
+   "fieldname": "billing_is_based_on",
+   "fieldtype": "Select",
+   "label": "Billing is based on",
+   "options": "\nUnloading Receipt\nDelivery Order\nWhich is less?",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_twba",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval: doc.contract_of_carriage",
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From Date",
+   "mandatory_depends_on": "eval: doc.contract_of_carriage"
+  },
+  {
+   "depends_on": "eval: doc.from_date",
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "To Date",
+   "mandatory_depends_on": "eval: doc.from_date"
+  },
+  {
+   "fetch_from": "contract_of_carriage.type_of_contract",
+   "fieldname": "type_of_contract",
+   "fieldtype": "Data",
+   "label": "Type Of Contract",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "contract_of_carriage.supplied_materials",
+   "fieldname": "supplied_materials",
+   "fieldtype": "Link",
+   "label": "Supplied Materials",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ywpa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_vfnb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_pwtk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval: doc.type_of_contract === 'Transportation'",
+   "fieldname": "transportation_price",
+   "fieldtype": "Currency",
+   "label": "Transportation Price",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: doc.type_of_contract === 'Transport and Supply'",
+   "fieldname": "supplied_material_price",
+   "fieldtype": "Currency",
+   "label": "Supplied Material Price",
+   "mandatory_depends_on": "eval: doc.type_of_contract === 'Transport and Supply'"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "contract_of_carriage.uom",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "UOM",
+   "options": "UOM"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-09 18:29:42.645582",
+ "modified": "2025-09-25 22:24:54.762951",
  "modified_by": "Administrator",
  "module": "TrackPro",
  "name": "Sales Billing Batch",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

@@ -9,13 +9,25 @@
   "section_break_gzf1",
   "amended_from",
   "status",
+  "sales_invoice",
+  "purchase_invoice",
+  "transported_by",
   "contract_of_carriage",
   "download_command",
   "posting_date",
   "time",
   "column_break_jnpc",
   "driver",
+  "full_name",
   "vehicle",
+  "supplier",
+  "driver_iqama_number",
+  "driver_name",
+  "driver_license_number",
+  "vehicle_configuration",
+  "vehicle_plate_number",
+  "tractor_plate_number",
+  "trailer_plate_number",
   "loading_area",
   "unloading_area",
   "quantity"
@@ -45,20 +57,22 @@
    "reqd": 1
   },
   {
+   "depends_on": "eval: doc.transported_by === \"Own Fleet\"",
    "fieldname": "driver",
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Driver",
-   "options": "Driver",
-   "reqd": 1
+   "mandatory_depends_on": "eval: doc.transported_by === \"Own Fleet\"",
+   "options": "Driver"
   },
   {
+   "depends_on": "eval: doc.transported_by === \"Own Fleet\"",
    "fieldname": "vehicle",
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Vehicle",
-   "options": "Vehicle",
-   "reqd": 1
+   "mandatory_depends_on": "eval: doc.transported_by === \"Own Fleet\"",
+   "options": "Vehicle"
   },
   {
    "default": "Today",
@@ -119,8 +133,92 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Pending Unloading\nUnloaded",
+   "options": "Pending Unloading\nUnloaded\nSales Billing\nPurchase Billing\nInvoiced",
    "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "Sales Invoice",
+   "options": "Sales Invoice",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "driver.full_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Full Name"
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "mandatory_depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "options": "Supplier"
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fieldname": "driver_iqama_number",
+   "fieldtype": "Data",
+   "label": "Driver Iqama Number",
+   "mandatory_depends_on": "eval: doc.transported_by === \"External Carrier\""
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fieldname": "driver_license_number",
+   "fieldtype": "Data",
+   "label": "Driver License Number"
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fieldname": "vehicle_configuration",
+   "fieldtype": "Select",
+   "label": "Vehicle Configuration",
+   "mandatory_depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "options": "\nTractor + Trailer\nTruck"
+  },
+  {
+   "depends_on": "eval: doc.vehicle_configuration === \"Tractor + Trailer\"",
+   "fieldname": "trailer_plate_number",
+   "fieldtype": "Data",
+   "label": "Trailer Plate Number"
+  },
+  {
+   "depends_on": "eval: doc.vehicle_configuration === \"Tractor + Trailer\"",
+   "fieldname": "tractor_plate_number",
+   "fieldtype": "Data",
+   "label": "Tractor Plate Number",
+   "mandatory_depends_on": "eval: doc.vehicle_configuration === \"Tractor + Trailer\""
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Link",
+   "label": "Purchase Invoice",
+   "options": "Purchase Invoice",
+   "read_only": 1
+  },
+  {
+   "fieldname": "transported_by",
+   "fieldtype": "Select",
+   "label": "Transported By",
+   "options": "\nOwn Fleet\nExternal Carrier"
+  },
+  {
+   "depends_on": "eval: doc.vehicle_configuration === \"Truck\"",
+   "fieldname": "vehicle_plate_number",
+   "fieldtype": "Data",
+   "label": "Vehicle Plate Number",
+   "mandatory_depends_on": "eval: doc.vehicle_configuration === \"Truck\""
+  },
+  {
+   "depends_on": "eval: doc.transported_by === \"External Carrier\"",
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name"
   }
  ],
  "grid_page_length": 50,
@@ -132,7 +230,7 @@
    "link_fieldname": "delivery_order"
   }
  ],
- "modified": "2025-08-08 23:36:24.606780",
+ "modified": "2025-09-25 12:54:15.340856",
  "modified_by": "Administrator",
  "module": "TrackPro",
  "name": "Delivery Order",
@@ -158,12 +256,24 @@
  "sort_order": "DESC",
  "states": [
   {
-   "color": "Orange",
+   "color": "Red",
    "title": "Pending Unloading"
   },
   {
-   "color": "Green",
+   "color": "Cyan",
    "title": "Unloaded"
+  },
+  {
+   "color": "Orange",
+   "title": "Sales Billing"
+  },
+  {
+   "color": "Purple",
+   "title": "Purchase Billing"
+  },
+  {
+   "color": "Green",
+   "title": "Invoiced"
   }
  ]
 }

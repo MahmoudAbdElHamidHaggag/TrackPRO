@@ -15,11 +15,13 @@
   "end_date",
   "company",
   "column_break_mvqu",
+  "posting_date",
+  "type_of_contract",
   "transported_materials",
+  "supplied_materials",
   "agreed_quantity",
   "uom",
   "loss_ratio",
-  "cost_center",
   "loading_and_unloading_areas_section",
   "loading_and_unloading_areas",
   "add_section",
@@ -64,6 +66,7 @@
    "options": "UOM"
   },
   {
+   "depends_on": "eval: doc.type_of_contract === 'Transportation'\r\n",
    "fieldname": "transported_materials",
    "fieldtype": "Data",
    "label": "Transported Materials"
@@ -111,6 +114,7 @@
    "reqd": 1
   },
   {
+   "description": "\u0646\u0633\u0628\u0629 \u0645\u0626\u0648\u064a\u0629 \u062d\u0633\u0628 \u0637\u0628\u064a\u0639\u0629 \u0627\u0644\u0639\u0642\u062f",
    "fieldname": "loss_ratio",
    "fieldtype": "Percent",
    "label": "Loss Ratio"
@@ -130,13 +134,6 @@
    "fieldtype": "Link",
    "label": "Company",
    "options": "Company"
-  },
-  {
-   "fieldname": "cost_center",
-   "fieldtype": "Link",
-   "in_standard_filter": 1,
-   "label": "Cost Center",
-   "options": "Cost Center"
   },
   {
    "fieldname": "connections_tab",
@@ -210,6 +207,29 @@
   {
    "fieldname": "column_break_kvdf",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "type_of_contract",
+   "fieldtype": "Select",
+   "label": "Type Of Contract",
+   "options": "\nTransportation\nTransport and Supply",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: doc.type_of_contract === 'Transport and Supply'",
+   "fieldname": "supplied_materials",
+   "fieldtype": "Link",
+   "label": "Supplied Materials",
+   "mandatory_depends_on": "eval: doc.type_of_contract === 'Transport and Supply'",
+   "options": "Item"
   }
  ],
  "grid_page_length": 50,
@@ -229,7 +249,7 @@
    "link_fieldname": "contract_of_carriage"
   }
  ],
- "modified": "2025-08-08 16:35:20.032318",
+ "modified": "2025-09-12 14:17:49.718444",
  "modified_by": "Administrator",
  "module": "TrackPro",
  "name": "Contract of Carriage",

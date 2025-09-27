@@ -1,0 +1,114 @@
+[
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2025-09-24 22:10:45.398238",
+  "module": "TrackPro",
+  "name": "Driver Vehicle Performance",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Billing Batch",
+  "reference_report": null,
+  "report_name": "Driver Vehicle Performance",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Driver Vehicle Performance",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Auditor"
+   },
+   {
+    "parent": "Driver Vehicle Performance",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Driver Vehicle Performance",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Driver Vehicle Performance",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "المبيعات"
+   },
+   {
+    "parent": "Driver Vehicle Performance",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "الكاشير"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-09-07 12:58:25.058978",
+  "module": "TrackPro",
+  "name": "Driver And Vehical income and exp",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Billing Batch",
+  "reference_report": null,
+  "report_name": "Driver And Vehical income and exp",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Driver And Vehical income and exp",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Auditor"
+   },
+   {
+    "parent": "Driver And Vehical income and exp",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Driver And Vehical income and exp",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Driver And Vehical income and exp",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "المبيعات"
+   },
+   {
+    "parent": "Driver And Vehical income and exp",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "الكاشير"
+   }
+  ],
+  "timeout": 0
+ }
+]

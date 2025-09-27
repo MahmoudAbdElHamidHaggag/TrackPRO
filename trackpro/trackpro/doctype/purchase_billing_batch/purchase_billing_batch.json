@@ -1,0 +1,179 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{supplier}-{billing_is_based_on}-{####}",
+ "creation": "2025-09-21 20:51:51.661607",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_pjwx",
+  "amended_from",
+  "status",
+  "transported_by",
+  "billing_is_based_on",
+  "supplier",
+  "column_break_utnk",
+  "posting_date",
+  "from_date",
+  "to_date",
+  "purchase_invoice",
+  "section_break_grcu",
+  "unbilled",
+  "section_break_tkfm",
+  "total_quantity",
+  "count_receipt",
+  "column_break_aosn",
+  "price"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_pjwx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Purchase Billing Batch",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Uninvoiced\nInvoiced",
+   "read_only": 1
+  },
+  {
+   "default": "External Carrier",
+   "fieldname": "transported_by",
+   "fieldtype": "Data",
+   "label": "Transported By",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_utnk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "billing_is_based_on",
+   "fieldtype": "Select",
+   "label": "Billing is based on",
+   "options": "\nUnloading Receipt\nDelivery Order\nWhich is less?"
+  },
+  {
+   "fieldname": "section_break_grcu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "unbilled",
+   "fieldtype": "Table",
+   "label": "Unbilled ",
+   "options": "Billing Basis"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_tkfm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_quantity",
+   "fieldtype": "Float",
+   "label": "Total Quantity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "count_receipt",
+   "fieldtype": "Int",
+   "label": "Count Receipt",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_aosn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "label": "Price",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Link",
+   "label": "Purchase Invoice",
+   "options": "Purchase Invoice",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-09-27 13:12:35.817682",
+ "modified_by": "Administrator",
+ "module": "TrackPro",
+ "name": "Purchase Billing Batch",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Cyan",
+   "title": "Uninvoiced"
+  },
+  {
+   "color": "Blue",
+   "title": "Invoiced"
+  }
+ ]
+}

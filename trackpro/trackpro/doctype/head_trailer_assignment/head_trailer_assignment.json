@@ -1,0 +1,142 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{tractor_vehicle}-{trailer_vehicle}-{DD}-{MM}-{YY}-{####}",
+ "creation": "2025-09-21 13:20:25.696055",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_vguw",
+  "amended_from",
+  "tractor_vehicle",
+  "trailer_vehicle",
+  "vehicle_date",
+  "column_break_lgkj",
+  "from_datetime",
+  "to_datetime",
+  "status",
+  "section_break_tivv",
+  "notes_column",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_vguw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Head Trailer Assignment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "tractor_vehicle",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tractor Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "trailer_vehicle",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Trailer Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_lgkj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Now",
+   "fieldname": "from_datetime",
+   "fieldtype": "Datetime",
+   "label": "From Datetime",
+   "no_copy": 1,
+   "read_only": 1,
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "to_datetime",
+   "fieldtype": "Datetime",
+   "label": "To Datetime",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nActive\nEnded",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_tivv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "vehicle_date",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Vehicle Date"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-09-23 13:14:50.401179",
+ "modified_by": "Administrator",
+ "module": "TrackPro",
+ "name": "Head Trailer Assignment",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Active"
+  },
+  {
+   "color": "Red",
+   "title": "Ended"
+  }
+ ],
+ "title_field": "vehicle_date"
+}

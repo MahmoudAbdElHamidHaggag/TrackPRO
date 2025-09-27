@@ -12,15 +12,15 @@ app_version = "0.1.0"
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "trackpro",
-# 		"logo": "/assets/trackpro/logo.png",
-# 		"title": "TrackPro",
-# 		"route": "/trackpro",
-# 		"has_permission": "trackpro.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "trackpro",
+		"logo": "/assets/trackpro/image/trackpro-logo.png",
+		"title": "TrackPro",
+		"route": "/trackpro",
+		"has_permission": "trackpro.api.permission.has_app_permission"
+	}
+]
 
 # Includes in <head>
 # ------------------
@@ -83,8 +83,8 @@ app_include_icons = "/assets/trackpro/image/trackpro-logo.png"
 # Installation
 # ------------
 
-# before_install = "trackpro.install.before_install"
-# after_install = "trackpro.install.after_install"
+before_install = "trackpro..install.install.before_install"
+after_install = "trackpro.install.install.after_install"
 
 # Uninstallation
 # ------------
@@ -178,6 +178,7 @@ app_include_icons = "/assets/trackpro/image/trackpro-logo.png"
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "trackpro.event.get_events"
 # }
+
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
@@ -244,16 +245,78 @@ app_include_icons = "/assets/trackpro/image/trackpro-logo.png"
 # }
 
 doc_events = {
+    "Head Trailer Assignment": {
+        "validate": "trackpro.trackpro.doctype.head_trailer_assignment.head_trailer_assignment.on_validate",
+        "before_insert": "trackpro.trackpro.doctype.head_trailer_assignment.head_trailer_assignment.on_before_insert",
+        "before_submit": "trackpro.trackpro.doctype.head_trailer_assignment.head_trailer_assignment.on_before_submit",
+        "on_update": "trackpro.trackpro.doctype.head_trailer_assignment.head_trailer_assignment.on_update",
+    },
+    "Driver Assignment": {
+        "validate": "trackpro.trackpro.doctype.driver_assignment.driver_assignment.on_validate",
+    },
     "Sales Invoice": {
         "on_submit": "trackpro.trackpro.billing.on_si_submit",
         "on_cancel": "trackpro.trackpro.billing.on_si_cancel",
-    }
+    },
+     "Purchase Invoice": {
+        "on_submit": "trackpro.trackpro.billing.on_pi_submit",
+        "on_cancel": "trackpro.trackpro.billing.on_pi_cancel",
+    },
+     "Unloading Receipt": {
+        "before_cancel": "trackpro.trackpro.billing.prevent_cancel_unloading",
+    },
+     "Delivery Order": {
+        "before_cancel": "trackpro.trackpro.billing.prevent_cancel_delivery_order",
+    },
+     "Purchase Billing Batch": {
+        "before_cancel": "trackpro.trackpro.billing.prevent_cancel_purchase_batch",
+    },
+     "Vehicle": {
+        "before_validate": "trackpro.install.vehicle_defaults.apply_defaults",
+    },
+    "Journal Entry": {
+        "validate": "trackpro.install.journal_vehicle_rules.vehicle_must_exist",
+    },
+
+}
+
+override_doctype_dashboards = {
+    "Vehicle": "trackpro.install.vehicle_defaults.get_data",
 }
 
 
 
-# doc_events = {
-#     "Sales Invoice": {
-#         "on_cancel": "trackpro.trackpro.integrations.si_hooks.on_sales_invoice_cancel",
-#     }
-# }
+# trackpro/trackpro/hooks.py
+fixtures = [
+    # تخصيصات على الدوكتايبات الأساسية
+    {
+        "doctype": "Custom Field",
+        "filters": [["dt", "in", [
+            "Account", "Vehicle", "Driver",
+            "Delivery Order", "Unloading Receipt",
+            "Sales Billing Batch", "Purchase Billing Batch",
+        ]]],
+    },
+    {
+        "doctype": "Property Setter",
+        "filters": [["doc_type", "in", [
+            "Account", "Vehicle", "Driver",
+            "Delivery Order", "Unloading Receipt",
+            "Sales Billing Batch", "Purchase Billing Batch",
+        ]]],
+    },
+
+    # مطبوعات/تقارير/سكربتات/مساحات TrackPRO
+    {"doctype": "Print Format",  "filters": [["module", "=", "TrackPRO"]]},
+    {"doctype": "Report",        "filters": [["module", "=", "TrackPRO"]]},
+    {"doctype": "Client Script", "filters": [["module", "=", "TrackPRO"]]},
+    {"doctype": "Server Script", "filters": [["module", "=", "TrackPRO"]]},
+    {"doctype": "Workspace",     "filters": [["module", "=", "TrackPRO"]]},
+    {
+        "doctype": "Property Setter",
+        "filters": [
+            ["property", "=", "default_print_format"],
+            ["doc_type", "in", ["Delivery Order", "Unloading Receipt", "Sales Billing Batch", "Purchase Billing Batch"]],
+        ],
+    },
+]
