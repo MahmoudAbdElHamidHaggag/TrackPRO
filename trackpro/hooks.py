@@ -83,7 +83,7 @@ app_include_icons = "/assets/trackpro/image/trackpro-logo.png"
 # Installation
 # ------------
 
-before_install = "trackpro..install.install.before_install"
+before_install = "trackpro.install.install.before_install"
 after_install = "trackpro.install.install.after_install"
 
 # Uninstallation
